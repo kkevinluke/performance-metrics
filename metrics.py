@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import time  # Import the time module
 
 # Initialize a counter for widget keys
 widget_counter = 0

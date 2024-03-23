@@ -82,15 +82,19 @@ def display_pi(df):
         scores = row[2:-1].tolist()  # Extract scores for each metric, excluding 'Overall Score'
         total_score = sum(scores)  # Total score for the employee
 
-        # Calculate proportions for each metric
-        proportions = [score / total_score for score in scores]
+        # Check if total_score is zero to avoid division by zero
+        if total_score != 0:
+            # Calculate proportions for each metric
+            proportions = [score / total_score for score in scores]
 
-        # Create a pie chart with custom segment sizes
-        plt.figure(figsize=(6, 6))
-        plt.pie(proportions, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
-        plt.title("Employee: {} Quality Scores".format(row['Name']))
+            # Create a pie chart with custom segment sizes
+            plt.figure(figsize=(6, 6))
+            plt.pie(proportions, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
+            plt.title("Employee: {} Quality Scores".format(row['Name']))
 
-        plt.show()   
+            plt.show()
+        else:
+            print("Total score is zero for employee:", row['Name'])   
 
 def main():
     # Create an empty DataFrame (replace this with your actual DataFrame)

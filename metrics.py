@@ -3,6 +3,14 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+# Initialize a counter for widget keys
+widget_counter = 0
+
+def generate_unique_key():
+    global widget_counter
+    widget_counter += 1
+    return f"widget_{widget_counter}"
+
 def calculate_overall_score(quality, productivity, efficiency, pkt):
     # Assign weights
     quality_weight = 0.35
@@ -94,7 +102,8 @@ def display_pi(df):
 
             plt.show()
         else:
-            print("Total score is zero for employee:", row['Name'])   
+            print("Total score is zero for employee:", row['Name'])
+
 
 def main():
     # Create an empty DataFrame (replace this with your actual DataFrame)
@@ -102,12 +111,12 @@ def main():
 
     # Example usage:
     while True:
-        name = st.text_input("Enter name of employee:", key=f"name_{np.random.randint(10000)}")
-        date = st.text_input("Enter date in dd/mm/yyyy format for {}: ".format(name), key=f"date_{np.random.randint(10000)}")
-        quality = st.number_input("Enter the quality score (out of 100) for {}: ".format(name), key=f"quality_{np.random.randint(10000)}")
-        productivity = st.number_input("Enter the productivity score (out of 100) for {}: ".format(name), key=f"productivity_{np.random.randint(10000)}")
-        efficiency = st.number_input("Enter the efficiency score (out of 100) for {}: ".format(name), key=f"efficiency_{np.random.randint(10000)}")
-        pkt = st.number_input("Enter the PKT score (out of 100) for {}: ".format(name), key=f"pkt_{np.random.randint(10000)}")
+        name = st.text_input("Enter name of employee:")
+        date = st.text_input("Enter date in dd/mm/yyyy format for {}: ".format(name))
+        quality = st.number_input("Enter the quality score (out of 100) for {}: ".format(name), key=generate_unique_key())
+        productivity = st.number_input("Enter the productivity score (out of 100) for {}: ".format(name), key=generate_unique_key())
+        efficiency = st.number_input("Enter the efficiency score (out of 100) for {}: ".format(name), key=generate_unique_key())
+        pkt = st.number_input("Enter the PKT score (out of 100) for {}: ".format(name), key=generate_unique_key())
         df = update_table(df, name, date, quality, productivity, efficiency, pkt)
         
         # Display scores on bar chart

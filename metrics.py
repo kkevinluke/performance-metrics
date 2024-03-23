@@ -9,7 +9,7 @@ widget_counter = 0
 def generate_unique_key():
     global widget_counter
     widget_counter += 1
-    return f"widget_{widget_counter}"
+    return f"widget_{widget_counter}_{int(time.time()*1000)}"
 
 def calculate_overall_score(quality, productivity, efficiency, pkt):
     # Assign weights

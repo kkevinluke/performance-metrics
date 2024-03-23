@@ -107,22 +107,15 @@ def display_pi(df):
 
 
 def main():
-    # Create an empty DataFrame (replace this with your actual DataFrame)
     df = pd.DataFrame(columns=['Name', 'Date', 'Quality', 'Productivity', 'Efficiency', 'PKT', 'Overall Score'])
-
+    
     # Example usage:
-    while True:
-        name = st.text_input("Enter name of employee:")
-        date = st.text_input("Enter date in dd/mm/yyyy format for {}: ".format(name))
-        quality = st.number_input("Enter the quality score (out of 100) for {}: ".format(name), key=generate_unique_key())
-        productivity = st.number_input("Enter the productivity score (out of 100) for {}: ".format(name), key=generate_unique_key())
-        efficiency = st.number_input("Enter the efficiency score (out of 100) for {}: ".format(name), key=generate_unique_key())
-        pkt = st.number_input("Enter the PKT score (out of 100) for {}: ".format(name), key=generate_unique_key())
-        df = update_table(df, name, date, quality, productivity, efficiency, pkt)
-        
-        # Display scores on bar chart
-        display_bar(df)
-        display_pi(df)
+    name_key = st.text_input("Enter name of employee:", key="name")
+    date_key = st.text_input("Enter date in dd/mm/yyyy format:", key="date")
+    quality_key = st.number_input("Enter the quality score (out of 100):", key="quality")
+    productivity_key = st.number_input("Enter the productivity score (out of 100):", key="productivity")
+    efficiency_key = st.number_input("Enter the efficiency score (out of 100):", key="efficiency")
+    pkt_key = st.number_input("Enter the PKT score (out of 100):", key="pkt")
 
 if __name__ == "__main__":
     main()

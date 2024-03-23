@@ -1,5 +1,6 @@
-import pandas as pd
 import streamlit as st
+import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 
 def calculate_overall_score(quality, productivity, efficiency, pkt):
@@ -38,6 +39,7 @@ def update_table(df, name, date, quality, productivity, efficiency, pkt):
     
     return df
 
+
 def display_bar(df):
     # Plotting
     plt.figure(figsize=(15, 6))
@@ -65,8 +67,9 @@ def display_bar(df):
         for j, value in enumerate(df[column]):
             plt.text(j + i * (bar_width + space_between), value + 1, str(value), ha='center', va='bottom', fontsize=8)
 
-    st.pyplot()
+    plt.show()
 
+    
 def display_pi(df):
     # Define colors for each metric
     colors = ['b', 'g', 'r', 'c', 'm']
@@ -87,27 +90,23 @@ def display_pi(df):
         plt.pie(proportions, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
         plt.title("Employee: {} Quality Scores".format(row['Name']))
 
-        st.pyplot()
+        plt.show()   
 
-# Main Streamlit app
 def main():
-    st.title("Employee Performance Evaluation")
-
-    # Create an empty DataFrame
+    # Create an empty DataFrame (replace this with your actual DataFrame)
     df = pd.DataFrame(columns=['Name', 'Date', 'Quality', 'Productivity', 'Efficiency', 'PKT', 'Overall Score'])
 
-    # Collect user input for employee evaluation
+    # Example usage:
     while True:
-        name = st.text_input("Enter name of employee:")
-        date = st.text_input("Enter date in dd/mm/yyyy format for {}: ".format(name))
-        quality = st.number_input("Enter the quality score (out of 100) for {}: ".format(name), min_value=0, max_value=100, value=0)
-        productivity = st.number_input("Enter the productivity score (out of 100) for {}: ".format(name), min_value=0, max_value=100, value=0)
-        efficiency = st.number_input("Enter the efficiency score (out of 100) for {}: ".format(name), min_value=0, max_value=100, value=0)
-        pkt = st.number_input("Enter the PKT score (out of 100) for {}: ".format(name), min_value=0, max_value=100, value=0)
-        if st.button("Add Employee"):
-            df = update_table(df, name, date, quality, productivity, efficiency, pkt)
-
-        # Display scores as bar chart and pie chart
+        name = st.text_input("Enter name of employee:", key=f"name_{np.random.randint(10000)}")
+        date = st.text_input("Enter date in dd/mm/yyyy format for {}: ".format(name), key=f"date_{np.random.randint(10000)}")
+        quality = st.number_input("Enter the quality score (out of 100) for {}: ".format(name), key=f"quality_{np.random.randint(10000)}")
+        productivity = st.number_input("Enter the productivity score (out of 100) for {}: ".format(name), key=f"productivity_{np.random.randint(10000)}")
+        efficiency = st.number_input("Enter the efficiency score (out of 100) for {}: ".format(name), key=f"efficiency_{np.random.randint(10000)}")
+        pkt = st.number_input("Enter the PKT score (out of 100) for {}: ".format(name), key=f"pkt_{np.random.randint(10000)}")
+        df = update_table(df, name, date, quality, productivity, efficiency, pkt)
+        
+        # Display scores on bar chart
         display_bar(df)
         display_pi(df)
 

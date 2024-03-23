@@ -116,6 +116,12 @@ def main():
     productivity_key = st.number_input("Enter the productivity score (out of 100):", key="productivity")
     efficiency_key = st.number_input("Enter the efficiency score (out of 100):", key="efficiency")
     pkt_key = st.number_input("Enter the PKT score (out of 100):", key="pkt")
+    df = update_table(df, name, date, quality, productivity, efficiency, pkt)
+        
+    # Display scores on bar chart
+    display_bar(df)
+    display_pi(df)
+
 
 if __name__ == "__main__":
     main()
